@@ -303,6 +303,8 @@ func (d *Daemon) UpdateManifests(ctx context.Context, spec update.Spec) (job.ID,
 		return d.queueJob(d.makeLoggingJobFunc(d.makeJobFromUpdate(d.updatePolicy(spec, s)))), nil
 	case update.ManualSync:
 		return d.queueJob(d.sync()), nil
+	case update.ContainerSpecs:
+		return d.queueJob(d.makeLoggingJobFunc(d.makeJobFromUpdate(d.release(spec, s)))), nil
 	default:
 		return id, fmt.Errorf(`unknown update type "%s"`, spec.Type)
 	}
