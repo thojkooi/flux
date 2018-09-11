@@ -91,4 +91,7 @@ spec:
         - --tiller-tls-ca-cert-path=/etc/fluxd/helm-ca/ca.crt
         {{- end }}
         {{- end }}
+        {{- if .Values.helmOperator.additionalArgs }}
+        {{ toYaml .Values.helmOperator.additionalArgs }}
+        {{- end }}
 {{- end -}}
